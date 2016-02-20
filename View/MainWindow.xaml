@@ -7,7 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:viewModel="clr-namespace:SystemShutdown.ViewModel"
         mc:Ignorable="d"
-        Title="System Shutdown" Height="175" Width="525" MinHeight="175" MinWidth="525" MaxHeight="175" WindowStartupLocation="CenterScreen">
+        Title="System Shutdown" Height="175" Width="525" MinHeight="175" MinWidth="525" MaxHeight="175" WindowStartupLocation="CenterScreen" Icon="/SystemShutdown;component/remote.ico">
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
