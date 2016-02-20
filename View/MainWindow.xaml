@@ -7,7 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:viewModel="clr-namespace:SystemShutdown.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="175.742" Width="525">
+        Title="System Shutdown" Height="175" Width="525" MinHeight="175" MinWidth="525" MaxHeight="175" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
@@ -21,15 +21,16 @@
         <GroupBox Header="Shutdown" Margin="10" Grid.Column="0">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <RadioButton Name="TimeSpanRadioButton" Content="in x minutes" Margin="0, 0, 10, 0" IsChecked="{Binding IsShutdownTimeSpanMode}" Click="ShutdownModeClicked" />
-                    <RadioButton Name="TimePickerRadioButton" Content="at an hour" IsChecked="{Binding IsShutdownTimeMode}" Click="ShutdownModeClicked" />
+                    <RadioButton Name="TimeSpanRadioButton" Content="in x minutes" Margin="0, 0, 10, 0" IsChecked="{Binding IsShutdownTimeSpanMode}" />
+                    <RadioButton Name="TimePickerRadioButton" Content="at an hour" IsChecked="{Binding IsShutdownTimeMode}" />
                 </StackPanel>
-                <xctk:TimeSpanUpDown Width="140" Value="{Binding ShutdownTimeLeft}" Visibility="{Binding IsShutdownTimeSpanVisible, Mode=OneWay}" />
-                <xctk:TimePicker Width="140" Value="{Binding ShutdownTime}" Visibility="{Binding IsShutdownTimePickerVisible, Mode=OneWay}" />
+                <xctk:TimeSpanUpDown Width="140" IsEnabled="{Binding IsEnabledWhileShuttingDown}" Value="{Binding ShutdownTimeLeft}" Visibility="{Binding IsShutdownTimeSpanVisible}" />
+                <xctk:DateTimePicker Width="180" IsEnabled="{Binding IsEnabledWhileShuttingDown}" Value="{Binding ShutdownTime}" Minimum="{Binding MinimumShutdownDate}" Visibility="{Binding IsShutdownTimePickerVisible}" Format="Custom" FormatString="dd-MM-yyyy hh:mm:ss" />
+                <Button Content="{Binding ShutdownButtonText}" Margin="10" Click="ShutdownComputerClick" />
             </StackPanel>
         </GroupBox>
         <GroupBox Header="Shutdown in..." Margin="10" Grid.Column="1">
-            <Label Content="{Binding ShutdownTimeLeft, Mode=OneWay}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="26.667"/>
+            <Label Content="{Binding FormattedShutdownTimeLeft, Mode=OneWay}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="26.667"/>
         </GroupBox>
     </Grid>
 </Window>
