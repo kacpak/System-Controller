@@ -1,0 +1,35 @@
+﻿<Window x:Class="SystemShutdown.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemShutdown"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:viewModel="clr-namespace:SystemShutdown.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="175.742" Width="525">
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.Resources>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Shutdown" Margin="10" Grid.Column="0">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <RadioButton Name="TimeSpanRadioButton" Content="in x minutes" Margin="0, 0, 10, 0" IsChecked="{Binding IsShutdownTimeSpanMode}" Click="ShutdownModeClicked" />
+                    <RadioButton Name="TimePickerRadioButton" Content="at an hour" IsChecked="{Binding IsShutdownTimeMode}" Click="ShutdownModeClicked" />
+                </StackPanel>
+                <xctk:TimeSpanUpDown Width="140" Value="{Binding ShutdownTimeLeft}" Visibility="{Binding IsShutdownTimeSpanVisible, Mode=OneWay}" />
+                <xctk:TimePicker Width="140" Value="{Binding ShutdownTime}" Visibility="{Binding IsShutdownTimePickerVisible, Mode=OneWay}" />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Shutdown in..." Margin="10" Grid.Column="1">
+            <Label Content="{Binding ShutdownTimeLeft, Mode=OneWay}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="26.667"/>
+        </GroupBox>
+    </Grid>
+</Window>
